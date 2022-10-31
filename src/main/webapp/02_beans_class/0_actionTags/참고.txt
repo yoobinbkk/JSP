@@ -1,0 +1,3 @@
+
+
+redirect & forward <-- 서로 꾀 다르다

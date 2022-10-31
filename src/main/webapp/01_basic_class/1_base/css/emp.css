@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+body {	background:#white; color:#black; }
+
+a:link {text-decoration:none; color: #646464}   /* 방문하지 않은 링크 색깔 */
+a:visited {text-decoration:none; color: #646464}  /* 방문한 링크 색깔 */
+a:active {text-decoration:none; color:#646464}   /* 마우스로 클릭하는 순간 색깔 */
+a:hover {color:#3B78A7; text-decoration:underline}   /* 마우스 오버시 색깔 */
+
+
+.title { background:#333333;
+			font-size:15px;
+			color:#ffff33;
+			text-align:center;
+			height:30px;
+}
+
+.oddRow { background:#f7ffde;
+			margin-left:30px;
+			font-size:12px;
+}	
+
+.evenRow { background:#c8e9ff;
+			margin-left:30px;
+			font-size:12px;
+}	
