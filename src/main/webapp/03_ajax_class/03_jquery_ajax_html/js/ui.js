@@ -30,8 +30,8 @@ $(document).ready(function(){
 			type : 'post',
 			dataType : 'html',
 			url : liurl,
-			success : function(data){
-				$('.notebook').html(data);
+			success : function(data){				// URL의 내용 자체가 data로 들어온다.
+				$('.notebook').html(data);			// $('.notebook')에 추가되는 것이 아니라 내용이 교체된다.
 			}
 		});
 		

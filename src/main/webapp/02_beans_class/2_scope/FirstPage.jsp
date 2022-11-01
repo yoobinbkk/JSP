@@ -25,10 +25,10 @@
 
 <!-- #############  -->
 <a href="SecondPage.jsp">페이지 전환</a>
-response.sendRedirect("SecondPage.jsp");
+<%--<% response.sendRedirect("SecondPage.jsp"); %>
 
 <!-- 페이지 forward 이동된다면  -->
-<jsp:forward page="SecondPage.jsp"></jsp:forward>
+<jsp:forward page="SecondPage.jsp"></jsp:forward>--%>
 
 
 <!-- 
