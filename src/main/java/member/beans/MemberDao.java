@@ -94,6 +94,7 @@ public class MemberDao {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 		
 		try{
 				
@@ -109,7 +110,7 @@ public class MemberDao {
 			ps.setString(1, id);
 			
 			 // 3. sql 전송
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			
 			if (rs.next())
 				flag = true;
@@ -118,10 +119,55 @@ public class MemberDao {
 			throw new MemberException("중복아이디 검사시 오류  : " + ex.toString() );			
 		} finally {
 			// 4. 객체 닫기
+			rs.close();
 			ps.close();
 			con.close();
 		}
 		
 		return flag;
 	}
+	
+	public boolean checkLogin(String id, String pass) throws Exception {
+		
+		boolean result = false;
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try{
+				
+			// 0. 연결 객체 얻어오기	
+			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+			System.out.println("db connect success");
+				
+			// 1. sql 문장
+			String sql = "select * from membertest where id=? and password=?";
+				
+			// 2. sql 전송 객체 만들기
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, pass);
+			
+			 // 3. sql 전송
+			rs = ps.executeQuery();
+			
+			if (rs.next())
+				result = true;
+			
+		}catch( Exception ex ){
+			throw new MemberException("중복아이디 검사시 오류  : " + ex.toString() );			
+		} finally {
+			// 4. 객체 닫기
+			rs.close();
+			ps.close();
+			con.close();
+		}
+		
+		return result;
+		
+	}
+	
+	
+	
 }
