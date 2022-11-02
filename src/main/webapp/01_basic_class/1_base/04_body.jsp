@@ -8,7 +8,7 @@
 </head>
 <body>
 
-		<%@ include file="04_header.jsp" %>
+	<%@ include file="04_header.jsp" %>
 
 	<!-- <!DOCTYPE html> -->
 	<!-- 윗단 시작 -->
@@ -70,7 +70,8 @@
 					class=e11>5</font>항)에 의해 금지하고 있습니다.<br></font> <br></td>
 	</table>
 	<!-- 아랫단 끝 -->
-
+	
+	<%@ include file="04_footer.jsp" %>
 
 </body>
 </html>

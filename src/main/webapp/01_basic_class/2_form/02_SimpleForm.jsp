@@ -24,9 +24,9 @@
 			</select><br/>
 
 		취미    :	 <input type="checkbox" name="hobby" value="쓰타크래프트"> 쓰타크래프트
-					 <input type="checkbox" name="hobby" value="한솥밥먹기"> 한솥밥먹기
-					 <input type="checkbox" name="hobby" value="멍때리기"> 멍때리기
-					 <input type="checkbox" name="hobby" value="그냥있기"> 그냥있기 <br/> <br/>
+				 <input type="checkbox" name="hobby" value="한솥밥먹기"> 한솥밥먹기
+				 <input type="checkbox" name="hobby" value="멍때리기"> 멍때리기
+				 <input type="checkbox" name="hobby" value="그냥있기"> 그냥있기 <br/> <br/>
 
 		
 		<input type="submit" value='전송'>
