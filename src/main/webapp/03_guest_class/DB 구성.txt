@@ -1,0 +1,10 @@
+
+테이블명 : GuestTB
+
+MESSAGE_ID 		NUMBER			메세지번호(PK)	자동증가수
+GUEST_NAME		VARCHAR2(10)	손님이름 	NOT NULL
+PASSWORD		VARCHAR2(10)	비밀번호	NOT NULL
+MESSAGE			VARCHAR2(1024)	메세지	NOT NULL
+
+
+시퀀스명 : seq_guestTb_messageId
