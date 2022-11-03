@@ -3,6 +3,8 @@ package board_ex.service;
 import java.util.List;
 
 import board_ex.model.*;
+import guest.model.MessageDao;
+import guest.model.MessageException;
 
 public class ListArticleService {
 	
@@ -19,13 +21,28 @@ public class ListArticleService {
 		return instance;
 	}
 	
-	public List <BoardVO> getArticleList() throws BoardException
+	public List <BoardVO> getArticleList(String pNum) throws BoardException
 	{
 		int pageNum = 1;
+		if(pNum != null) pageNum = Integer.parseInt(pNum);
 		
+		int startRow = countPerPage * pageNum - 2;
+		int endRow = pageNum * countPerPage;
 		
 		List <BoardVO> mList = BoardDao.getInstance().selectList();			
 		return mList;
 	}
+	
+	public int getTotalPage() throws BoardException
+	{
+		// 전체 레코드 수
+		totalRecCount = BoardDao.getInstance().getTotalCount();
+		pageTotalCount = totalRecCount / countPerPage;
 		
+		if(totalRecCount%countPerPage > 0)
+			pageTotalCount++;
+		
+		return pageTotalCount;	// 페이지 수 리턴
+	}
+	
 }

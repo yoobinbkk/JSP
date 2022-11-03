@@ -10,17 +10,17 @@
 %>
 
 <%
-// 전체 메세지 레코드 검색
-ListArticleService service = ListArticleService.getInstance();
-List <BoardVO> mList =  service.getArticleList();
-
-// **pager**
+// **paging**
 // 현 페이지 정보 설정
 String pNum = request.getParameter("page");
 if(pNum == null) pNum = "1";
 
+//전체 메세지 레코드 검색
+ListArticleService service = ListArticleService.getInstance();
+List <BoardVO> mList =  service.getArticleList(pNum);
 
-
+// 총 페이지 수
+int totalPageCount = service.getTotalPage();
 %>
 
 <HTML>
@@ -64,8 +64,8 @@ if(pNum == null) pNum = "1";
 	<hr/>
 	
 	<% for(int i=0 ; i<totalPageCount ; i++) { %>
-	
-	<% } %>
+		<a href="BoardList.jsp?page=<%=i%>">[<%= i %>]</a>
+	<% } // end of for%>
 	
 </BODY>
 </HTML>

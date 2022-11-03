@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import guest.model.MessageException;
+
 public class BoardDao
 {
 	
@@ -162,15 +164,21 @@ public class BoardDao
 			con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
 			
 			// * sql 문장만들기
-			String sql = "select seq, title, writer, regdate, cnt from board_ex";
+			String sql = "SELECT *\r\n"
+					+ "FROM board_ex\r\n"
+					+ "WHERE seq IN (SELECT seq\r\n"
+					+ "	FROM (SELECT rownum AS rnum, seq \r\n"
+					+ "		FROM (SELECT seq FROM board_ex ORDER BY seq DESC))\r\n"
+					+ "	WHERE rnum>=? AND rnum<=?)\r\n"
+					+ "ORDER BY seq DESC";
 			
 			// * 전송객체 얻어오기
 			ps = con.prepareStatement( sql );
+			ps.setInt(1, startRow);
+			ps.setInt(2, endRow);
 			
 			// * 전송하기
 			rs = ps.executeQuery();
-			ps.setInt(1, startRow);
-			ps.setInt(2, endRow);
 			
 			// * 결과 받아 List<BoardVO> 변수 mList에 지정하기
 			while(rs.next()) {
@@ -194,6 +202,38 @@ public class BoardDao
 			if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
 			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
 		}		
+	}
+	
+	/* -------------------------------------------------------
+	 * 메세지 전체 레코드 수를 검색
+	 */
+	
+	public int getTotalCount() throws BoardException{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int count = 0;
+
+		try{
+			// 1. 연결객체
+			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+			// 2. sql 문장
+			String sql = "select count(*) as cnt from board_ex";
+			// 3. 전송객체
+			ps = con.prepareStatement(sql);
+			// 4. 전송하기
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				count = rs.getInt("cnt");
+			}
+			return  count;
+			
+		}catch( Exception ex ){
+			throw new BoardException("방명록 ) DB에 목록 검색시 오류  : " + ex.toString() );	
+		} finally{
+			if( rs   != null ) { try{ rs.close();  } catch(SQLException ex){} }
+			if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
+			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
+		}			
 	}
 	
 	//--------------------------------------------
