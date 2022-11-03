@@ -33,6 +33,8 @@
 		<%= m.getGuestName() %>님의 방명록에 메세지를 남겼습니다.
 		방명록에 메세지를 남겼습니다. 
 	</font><br/><br/><br/>
-	 <a href="listMessage.jsp">[ 목록보기 ]</a>
+	<a href="listMessage.jsp">[ 목록보기 ]</a>
+	<br/><br/>
+	<a href="insertMessage.jsp">[ 다시 글쓰기 ]</a>
 </body>
 </html>

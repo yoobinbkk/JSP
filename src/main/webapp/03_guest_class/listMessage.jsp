@@ -4,11 +4,19 @@
 <%@ page import="java.util.List" %>
 
 <%
+	// 현 페이지 정보 설정
 	String pNum = request.getParameter("page");
+	if(pNum == null) pNum = "1";
+	
+	// 첫 행 번호를 계산
+	int currentPage = Integer.parseInt(pNum);
+	// 전후 페이지로
+	int prev = currentPage - 1;
+	int next = currentPage + 1;
 
 	// 전체 메세지 레코드 검색 
 	ListMessageService service = ListMessageService.getInstance();
-	List <Message> mList =  service.getMessageList(pNum);
+	List <Message> mList = service.getMessageList(pNum);
 	
 	int totalPageCount = service.getTotalPage();
 %>    
@@ -17,7 +25,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title> 방명록 목록 </title>
-</script>
+
+<style type="text/css">
+
+	a.n {text-decoration-line : none}
+
+</style>
+
 </head>
 <body>
 
@@ -47,13 +61,15 @@
 	<a href="insertMessage.jsp">글쓰기</a>
 	<hr/>
 	
-	<input type="button" name="previous" value="&lt;" />
+	<a class="n" href="listMessage.jsp?page=<%= prev %>">&lt;&lt;</a>
+	<a class="n" href="listMessage.jsp?page=<%= prev %>">&lt;</a>
 	
 	<% for(int i=1 ; i<=totalPageCount ; i++) { %>
 		<a href="listMessage.jsp?page=<%=i%>">[<%= i %>]</a>
 	<% } // end of for %>
 	
-	<input type="button" name="next" value="&gt;" />
+	<a class="n" href="listMessage.jsp?page=<%= next %>">&gt;</a>
+	<a class="n" href="listMessage.jsp?page=<%= next %>">&gt;&gt;</a>
 	
 </body>
 </html>
