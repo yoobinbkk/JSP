@@ -16,4 +16,40 @@
   	<url-pattern>/HelloServlet</url-pattern>
   </servlet-mapping>
   
+  
+  <servlet>
+  	<servlet-name>SimpleControl</servlet-name>
+  	<servlet-class>mvc2.simple.SimpleControl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>SimpleControl</servlet-name>
+  	<url-pattern>/SimpleControl</url-pattern>
+  	<url-pattern>*.yim</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>GuestControl</servlet-name>
+  	<servlet-class>mvc.guest.control.GuestControl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>GuestControl</servlet-name>
+  	<url-pattern>/GuestControl</url-pattern>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>BoardControl</servlet-name>
+  	<servlet-class>boardMvc.control.BoardControl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>BoardControl</servlet-name>
+  	<url-pattern>/BoardControl</url-pattern>
+  	<url-pattern>*.doo</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
