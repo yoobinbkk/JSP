@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import boardMvc.model.BoardException;
 import boardMvc.model.BoardDao;
 import boardMvc.model.BoardVO;
-import boardMvc.command.CommandException;
 
 public class CommandList implements Command 
 {

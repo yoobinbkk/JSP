@@ -18,6 +18,7 @@
 <title>게시글 수정하기</title>
 </head>
  <body>
+ 
 	<h4> 게시판 글 수정하기 </h4><br/>
 	<form name='frm' method='post' action="BoardModify.jsp">
 	제  목 : <input type='text' name='title' value="<%= vo.getTitle() %>"><br/><br/>

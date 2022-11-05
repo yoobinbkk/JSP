@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import boardMvc.command.Command;
-import boardMvc.command.CommandException;
-import boardMvc.command.CommandList;
-import boardMvc.command.CommandNull;
+import boardMvc.command.*;
 
 public class BoardControl extends HttpServlet {
 
@@ -29,8 +26,15 @@ public class BoardControl extends HttpServlet {
 	private void initCommand(){
 		commandMap = new HashMap();
 
-		commandMap.put("main-page",	new CommandNull("BoardMain.jsp") );
-		commandMap.put("list-page",	new CommandList("BoardList.jsp") );
+		commandMap.put("main-page",	new CommandNull("BoardMain.jsp"));					// 메인 페이지
+		commandMap.put("list-page",	new CommandList("BoardList.jsp"));					// 게시판 페이지
+		commandMap.put("input-form", new CommandNull("BoardInputForm.jsp"));			// 글쓰기 페이지
+		commandMap.put("input-doo", new CommandInput("BoardSave.jsp"));					// 알림(글쓰기) 페이지
+		commandMap.put("view-page", new CommandView("BoardView.jsp"));					// 게시글 페이지
+		commandMap.put("modify-form", new CommandModifyView("BoardModifyForm.jsp"));	// 게시글 수정 페이지
+		commandMap.put("modify-doo", new CommandModify("BoardModify.jsp"));				// 알림(게시글 수정) 페이지
+		commandMap.put("delete-form", new CommandDeleteForm("BoardDeleteForm.jsp"));	// 게시글 삭제 전 페이지
+		commandMap.put("delete-doo", new CommandDelete("BoardDelete.jsp"));				// 게시글 삭제 후 페이지
 		
 	}
 	
@@ -62,6 +66,11 @@ public class BoardControl extends HttpServlet {
 				cmd = (Command)commandMap.get( cmdKey);
 			}else{
 				throw new CommandException("지정할 명령어가 존재하지 않음");
+			}
+			
+			// 게시글의 번호를 전달해야 할 때 사용
+			if (cmdKey.equals("view-page") || cmdKey.equals("modify-form") || cmdKey.equals("delete-form")) {
+				request.setAttribute("seq", request.getParameter("seq"));
 			}
 
 			nextPage = cmd.execute(request, response);

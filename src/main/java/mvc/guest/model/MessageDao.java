@@ -212,8 +212,8 @@ public class MessageDao {
 
 			ps		= con.prepareStatement( sql );
 			
-			ps.setInt	( 1, messageId	);
-			ps.setString	( 2, password	);
+			ps.setInt( 1, messageId	);
+			ps.setString( 2, password	);
 			
 			return ps.executeUpdate();
 					

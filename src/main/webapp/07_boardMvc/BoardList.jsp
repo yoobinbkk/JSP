@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>BoardList</title>
 </head>
 <body>
@@ -41,7 +41,7 @@
 	<% for(BoardVO bvo : mList) { %>
 		<tr>
 			<td> <%= bvo.getSeq() %> </td>
-			<td><a href="BoardView.jsp?seq=<%= bvo.getSeq() %>"> <%= bvo.getTitle() %> </a></td>
+			<td><a href="BoardControl?cmd=view-page&seq=<%= bvo.getSeq() %>"> <%= bvo.getTitle() %> </a></td>
 			<td> <%= bvo.getWriter() %> </td>
 			<td> <%= bvo.getRegdate() %> </td>
 			<td> <%= bvo.getCnt() %> </td>
@@ -50,7 +50,7 @@
 	<% }  // end of else %>
 		<tr>
 			<td colspan="5">
-				<a href="BoardInputForm.jsp">글쓰기</a>
+				<a href="BoardControl?cmd=input-form">글쓰기</a>
 			</td>
 		</tr>
 	</table>

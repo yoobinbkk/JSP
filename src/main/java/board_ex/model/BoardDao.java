@@ -302,6 +302,7 @@ public class BoardDao
 		}
 		
 	}
+	
 	//--------------------------------------------
 	//#####	 게시글 수정할 때
 	public int update( BoardVO rec ) throws BoardException
