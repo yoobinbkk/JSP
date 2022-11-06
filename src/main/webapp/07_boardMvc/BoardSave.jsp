@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    
+<%
+	String result = String.valueOf(request.getAttribute("result"));
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +12,10 @@
 <title>BoardSave</title>
 </head>
 <body>
-	<font size="3" color="#bb44cc">
-		성공적으로 게시판에 글을 남겼습니다. 
-	</font><br/><br/><br/>
-	<a href="BoardControl?cmd=list-page"> [ 목록보기 ]</a>
+	<% if(result.equals("1")) { 
+		response.sendRedirect("BoardControl?cmd=list-page");
+	} else { %>
+	<font size="3" color="#bb44cc">글을 남기는데 실패했습니다. </font>
+	<% } %>
 </body>
 </html>

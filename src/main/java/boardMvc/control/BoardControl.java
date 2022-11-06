@@ -72,6 +72,11 @@ public class BoardControl extends HttpServlet {
 			if (cmdKey.equals("view-page") || cmdKey.equals("modify-form") || cmdKey.equals("delete-form")) {
 				request.setAttribute("seq", request.getParameter("seq"));
 			}
+			
+			// 게시판의 페이지를 넘겨야 할 때 사용
+			if (cmdKey.equals("list-page")) {
+				request.setAttribute("currentPage", request.getParameter("currentPage"));
+			}
 
 			nextPage = cmd.execute(request, response);
 

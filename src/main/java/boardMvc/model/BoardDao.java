@@ -111,10 +111,11 @@ public class BoardDao {
 	 * 인자 :	BoardVO
 	 * 리턴값 : 입력한 행수를 받아서 리턴
 	*/
-	public void insert( BoardVO vo ) throws BoardException
+	public int insert( BoardVO vo ) throws BoardException
 	{
 
 		PreparedStatement ps = null;
+		
 		try{
 
 			con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
@@ -130,8 +131,8 @@ public class BoardDao {
 			ps.setString(3, vo.getContent());
 			ps.setString(4, vo.getPass());
 	
-			ps.executeUpdate();			
-
+			return ps.executeUpdate();
+			
 		}catch( Exception ex ){
 			throw new BoardException("게시판 ) DB에 입력시 오류  : " + ex.toString() );	
 		} finally{
@@ -273,6 +274,99 @@ public class BoardDao {
 		}catch( Exception ex ){
 			throw new BoardException("방명록 ) DB에 삭제시 오류  : " + ex.toString() );	
 		} finally{
+			if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
+			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
+		}		
+	}
+	
+	
+	/* -------------------------------------------------------
+	 * 메세지 전체 레코드 수를 검색
+	 */
+	
+	public int getTotalRows() throws BoardException{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int totalRows = 0;
+
+		try{
+			// 1. 연결객체
+			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+			// 2. sql 문장
+			String sql = "select count(*) as cnt from board_mvc";
+			// 3. 전송객체
+			ps = con.prepareStatement(sql);
+			// 4. 전송하기
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				totalRows = rs.getInt("cnt");
+			}
+			return  totalRows;
+			
+		}catch( Exception ex ){
+			throw new BoardException("방명록 ) DB에 목록 검색시 오류  : " + ex.toString() );	
+		} finally{
+			if( rs   != null ) { try{ rs.close();  } catch(SQLException ex){} }
+			if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
+			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
+		}			
+	}
+	
+	
+	/************************************************
+	 * 함수명 : selectList
+	 * 역할 :	해당 페이지의 레코드를 검색하는 함수
+	 * 인자 :	int startRow, int endRow
+	 * 리턴값 : 테이블의 레코드를 BoardVO 지정하고 그것을 ArrayList에 추가한 값
+	*/
+
+	public List<BoardVO> selectList(int startRow, int endRow) throws BoardException
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<BoardVO> mList = new ArrayList<BoardVO>();
+		boolean isEmpty = true;
+		
+		try{
+			// 연결 객체
+			con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
+			
+			// * sql 문장만들기
+			String sql = "SELECT * "
+					+ " FROM board_mvc "
+					+ " WHERE seq IN (SELECT seq "
+					+ "		FROM (SELECT rownum AS rnum, seq "
+					+ "			FROM (SELECT seq FROM board_mvc ORDER BY seq DESC)) "
+					+ "		WHERE rnum>=? AND rnum<=?) "
+					+ " ORDER BY seq DESC";
+			
+			// * 전송객체 얻어오기
+			ps = con.prepareStatement( sql );
+			ps.setInt(1, startRow);
+			ps.setInt(2, endRow);
+			
+			// * 전송하기
+			rs = ps.executeQuery();
+			
+			// * 결과 받아 List<BoardVO> 변수 mList에 지정하기
+			while(rs.next()) {
+				BoardVO vo = new BoardVO();
+				vo.setSeq(rs.getInt("seq"));
+				vo.setTitle(rs.getString("title"));
+				vo.setWriter(rs.getString("writer"));
+				vo.setRegdate(rs.getString("regdate"));
+				vo.setCnt(rs.getInt("cnt"));
+				mList.add(vo);
+				isEmpty = false;
+			}
+			
+			if( isEmpty ) return Collections.emptyList();
+			
+			return mList;
+		}catch( Exception ex ){
+			throw new BoardException("게시판 ) DB에 목록 검색시 오류  : " + ex.toString() );	
+		} finally{
+			if( rs   != null ) { try{ rs.close();  } catch(SQLException ex){} }
 			if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
 			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
 		}		

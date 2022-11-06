@@ -26,7 +26,9 @@ public class CommandInput implements Command {
 			vo.setContent( request.getParameter("content"));
 			vo.setPass( request.getParameter("pass"));
 			
-			BoardDao.getInstance().insert(vo);
+			int result = BoardDao.getInstance().insert(vo);
+			
+			request.setAttribute("result", result);
 			
 		}catch( BoardException ex ){
 			throw new CommandException("CommandInput.java < 입력시 > " + ex.toString() ); 

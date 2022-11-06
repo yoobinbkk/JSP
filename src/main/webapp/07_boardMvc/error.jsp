@@ -9,7 +9,7 @@
 <body>
 	<center>
 	죄송합니다. 네트워크 문제가 발생하였습니다. <br/><br/>
-	<img src="mvcGuest/imgs/error.png"><br/>
+	<img src="./img/error.gif"><br/>
 	</center>
 </body>
 </html>

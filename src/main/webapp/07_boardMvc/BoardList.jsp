@@ -13,6 +13,11 @@
 	// Control에서 param으로 넘어오는 정보를 mList에 저장
 	List <BoardVO> mList = (List <BoardVO>) request.getAttribute("param");
 	
+	// 시작과 끝 페이지
+	int startPage = Integer.parseInt(String.valueOf(request.getAttribute("startPage")));
+	int endPage = Integer.parseInt(String.valueOf(request.getAttribute("endPage")));
+	int totalPages = Integer.parseInt(String.valueOf(request.getAttribute("totalPages")));
+	
 %>
 
 <!DOCTYPE html>
@@ -56,6 +61,18 @@
 	</table>
 	
 	<hr/>
+	
+	<% if(startPage!=1) { %>
+		<a href="BoardControl?cmd=list-page&currentPage=<%= startPage-1 %>">Prev</a>
+	<% } // end of if %>
+	
+	<% for(int i=startPage ; i<=endPage ; i++) { %>
+		<a href="BoardControl?cmd=list-page&currentPage=<%=i%>">[<%= i %>]</a>
+	<% } // end of for %>
+	
+	<% if(endPage<totalPages) { %>
+	<a href="BoardControl?cmd=list-page&currentPage=<%= endPage+1 %>">Next</a>
+	<% } // end of if %>
 
 </body>
 </html>
