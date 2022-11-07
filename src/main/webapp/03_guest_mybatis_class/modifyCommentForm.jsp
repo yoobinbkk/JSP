@@ -4,6 +4,8 @@
  <%@ page import="mybatis.guest.service.CommentService" %>
 
 <%
+	request.setCharacterEncoding("utf-8");
+
 	int commentNo = Integer.parseInt( request.getParameter("cId"));
 	Comment comment = CommentService.getInstance().selectCommentByPrimaryKey(commentNo);
 %>

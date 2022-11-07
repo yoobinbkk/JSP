@@ -8,18 +8,6 @@
 
 <%
 	CommentService.getInstance().modifyComment(comment);
+	response.sendRedirect("viewComment.jsp?cId=" + comment.getCommentNo());
 %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>수정함</title>
-</head>
-<body>
-
-수정되었습니다. <br/>
-<a href="listComment.jsp">목록보기</a>
-
-</body>
-</html>

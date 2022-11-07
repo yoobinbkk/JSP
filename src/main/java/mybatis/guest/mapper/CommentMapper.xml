@@ -37,8 +37,8 @@ from comment_tab
  
  <update id="modifyComment" parameterType="Comment">
  	update comment_tab
- 	set comment_content=#{Comment.commentContent}
- 	where comment_no=#{Comment.commentNo}
+ 	set comment_content=#{commentContent}
+ 	where comment_no=#{commentNo}
  </update>
  
 </mapper>
