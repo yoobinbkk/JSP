@@ -1,0 +1,10 @@
+
+테이블명 : comment_tab
+
+comment_no number PK 		--글번호
+user_id varchar2(30) 		--작성자
+comment_content varchar2(1024) --내용
+reg_dat date				--작성일
+
+-- 레코드 2~3개 입력
+--반드시 commit()

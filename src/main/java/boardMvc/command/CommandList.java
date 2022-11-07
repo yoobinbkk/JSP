@@ -20,8 +20,8 @@ public class CommandList implements Command
 	public String execute( HttpServletRequest request, HttpServletResponse response  ) throws CommandException {
 		try{
 			
-			int pagesPerPage = 5;			// 목록에 드러나 있는 페이지 갯수
-			int rowsPerPage = 5;			// 페이지의 게시글 수
+			int pagesPerPage = 10;			// 목록에 드러나 있는 페이지 갯수
+			int rowsPerPage = 10;			// 페이지의 게시글 수
 			
 			int currentPage = 1;									// 현재 페이지
 			if(request.getAttribute("currentPage")!=null) {
