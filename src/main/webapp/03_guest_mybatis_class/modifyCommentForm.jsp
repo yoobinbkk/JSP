@@ -20,8 +20,8 @@
 
 <form name="frm" action="modifyComment.jsp" >
 <table>
-	<tr><td>글번호</td><td name="commentNo"><%=  comment.getCommentNo()%></td></tr>
-	<tr><td>사용자</td><td name="userId"><%=  comment.getUserId()%></td></tr>
+	<tr><td>글번호</td><td><span name="commentNo"><%=  comment.getCommentNo()%></span></td></tr>
+	<tr><td>사용자</td><td><span name="userId"><%=  comment.getUserId()%></span></td></tr>
 	<tr><td>메세지</td><td><textarea name="commentContent" rows="10" columns="40"><%=  comment.getCommentContent()%></textarea></td></tr>
 	<tr><td><input type="submit" value="입력"/></td></tr>
 </table>

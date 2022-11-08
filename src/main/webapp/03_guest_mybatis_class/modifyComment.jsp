@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ page import="mybatis.guest.model.Comment" %>    
  <%@ page import="mybatis.guest.service.CommentService" %>
  
 <jsp:useBean id="comment" class="mybatis.guest.model.Comment">

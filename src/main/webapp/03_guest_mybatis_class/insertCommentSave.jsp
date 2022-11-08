@@ -14,7 +14,7 @@
  
  <!-- 서비스의 메소드 호출  -->
  <%
- CommentService.getInstance().insertComment(comment);
+ 	CommentService.getInstance().insertComment(comment);
  %>
  
     
